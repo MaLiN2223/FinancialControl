@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using Utils;
 
@@ -35,6 +36,12 @@ namespace DatabaseProxy
         {
             Users.Add(new User() { Login = login, Password = password.Hash() });
             return this.SaveChangesAsync();
+        }
+
+        public void AddCategory(Category category)
+        {
+            Categories.Add(category);
+            SaveChanges();
         }
     }
 
