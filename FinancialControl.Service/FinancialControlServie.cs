@@ -7,5 +7,9 @@ namespace FinancialControl.Service
 {
     public class FinancialControlServie
     {
+        public object Put()
+        {
+            return null;
+        }
     }
 }
