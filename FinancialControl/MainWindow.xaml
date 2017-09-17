@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <StackPanel>
+            <Button Click="AddNewReceiptClick">Add new receipt</Button>
+            <Button Click="ButtonBase2_OnClick">Add new category</Button>
+
+        </StackPanel>
     </Grid>
 </Window>

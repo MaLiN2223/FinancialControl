@@ -105,13 +105,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseProxy.cs" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FinancialControlServie.cs" />
+    <Compile Include="FinancialControlService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -119,9 +120,17 @@
     <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DatabaseProxy\DatabaseProxy.csproj">
+    <ProjectReference Include="..\DatabaseProxy\FinancialControl.Database.csproj">
       <Project>{caf7bbb6-a9ef-4535-ae19-bdeabe9fb662}</Project>
-      <Name>DatabaseProxy</Name>
+      <Name>FinancialControl.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FinancialControl.Repositories\FinancialControl.Repositories.csproj">
+      <Project>{68e0db04-d0b3-4063-8f9d-7edf587b6d53}</Project>
+      <Name>FinancialControl.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{d44139e5-cb53-4ebd-8155-d4cfec73b7d9}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

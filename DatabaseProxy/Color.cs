@@ -1,4 +1,4 @@
-﻿namespace DatabaseProxy
+﻿namespace FinancialControl.Database
 {
     public class Color
     {

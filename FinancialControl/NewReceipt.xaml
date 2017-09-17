@@ -1,0 +1,34 @@
+﻿<Window x:Class="FinancialControl.NewReceipt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinancialControl" 
+        xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        Title="NewReceipt" Height="300" Width="300">
+    <Grid>
+        <StackPanel>
+            <DatePicker x:Name="DatePicker" Text="Select date"/>
+            <StackPanel x:Name="NewProductPanel">
+                <Label>Product name:</Label>
+                <TextBox x:Name="ProductName"></TextBox>
+                <Label>Product price:</Label>
+                <toolkit:DoubleUpDown x:Name="ProductPrice" Minimum="0" Increment="0.01"></toolkit:DoubleUpDown>
+                <Label>Product</Label>
+                <toolkit:DoubleUpDown x:Name="ProductVolume" Minimum="0" Increment="0.01"></toolkit:DoubleUpDown>
+                <Label>Product category</Label>
+                <ComboBox x:Name="CategoriesList"/>
+                <Button x:Name="AddProduct" Content="Add" Click="AddProduct_OnClick"/>
+            </StackPanel>
+            <ScrollViewer>
+                <DataGrid>
+
+                </DataGrid>
+            </ScrollViewer>
+            <Button Content="Save"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
+

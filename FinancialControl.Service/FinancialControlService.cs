@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using DatabaseProxy;
+using FinancialControl.Database;
+using FinancialControl.Repositories;
 using ServiceStack;
 using ServiceStack.Web;
+using Category = FinancialControl.Repositories.Category;
 
 namespace FinancialControl.Service
 {
@@ -27,28 +29,28 @@ namespace FinancialControl.Service
         public byte G { get; set; }
         public byte B { get; set; }
     }
-    public class FinancialControlServie : IService
+    public class FinancialControlService : IService
     {
+        private readonly IDataAccessProxy _proxy;
+
+        public FinancialControlService(IDataAccessProxy proxy)
+        {
+            _proxy = proxy;
+        }
         public void Post(CreateCategoryRequest request)
         {
-            using (var db = new DatabaseContext())
+            var c = request.Color;
+            _proxy.AddCategory(new Category()
             {
-                var c = request.Color;
-                db.AddCategory(new Category()
-                {
-                    Description = request.Description,
-                    Title = request.Title,
-                    Color = new Color { R = c.R, G = c.G, B = c.B }
-                });
-            }
+                Description = request.Description,
+                Title = request.Title,
+                Color = System.Drawing.Color.FromArgb(c.R, c.G, c.B)
+            });
         }
 
         public List<Category> Get(AllCategoriesRequest request)
         {
-            using (var db = new DatabaseContext())
-            {
-                return db.Categories.Select(x => x).ToList();
-            }
+            return _proxy.GetCategories();
         }
     }
 }

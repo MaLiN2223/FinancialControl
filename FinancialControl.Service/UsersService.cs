@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using DatabaseProxy;
+using FinancialControl.Database;
+using FinancialControl.Repositories;
 using ServiceStack;
 
 namespace FinancialControl.Service
@@ -21,20 +22,20 @@ namespace FinancialControl.Service
     }
     public class UsersService : IService
     {
-        public async Task<int> Post(NewUserRequest request)
+        private readonly IDataAccessProxy _proxy;
+
+        public UsersService(IDataAccessProxy proxy)
         {
-            using (var db = new DatabaseContext())
-            {
-                return await db.CreateUser(request.Login, request.Password);
-            }
+            _proxy = proxy;
+        }
+        public void Post(NewUserRequest request)
+        {
+            _proxy.CreateUser(request.Login, request.Password);
         }
 
         public List<string> Get(GetAllUsersRequest request)
         {
-            using (var db = new DatabaseContext())
-            {
-                return db.Users.Select(x => x.Login).ToList();
-            }
+            return _proxy.GetUsers();
         }
     }
 }

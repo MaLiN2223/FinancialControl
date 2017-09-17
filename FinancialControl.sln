@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialControl.Service", "FinancialControl.Service\FinancialControl.Service.csproj", "{18BD0C1D-5233-4812-8906-B2B7705854BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseProxy", "DatabaseProxy\DatabaseProxy.csproj", "{CAF7BBB6-A9EF-4535-AE19-BDEABE9FB662}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialControl.Database", "DatabaseProxy\FinancialControl.Database.csproj", "{CAF7BBB6-A9EF-4535-AE19-BDEABE9FB662}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

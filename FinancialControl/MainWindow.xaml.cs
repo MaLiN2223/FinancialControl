@@ -22,9 +22,24 @@ namespace FinancialControl
     }
     public partial class MainWindow : Window, IMainWindow
     {
-        public MainWindow(ICategoriesRepository categoriesRepository)
+        private readonly ICategoriesRepository _categoriesRepository;
+
+        public MainWindow(string apiUrl)
         {
+            _categoriesRepository =
+                new CategoriesRepository(new DataAccess(apiUrl), new PathRepository());
             InitializeComponent();
+        }
+
+        private void AddNewReceiptClick(object sender, RoutedEventArgs e)
+        {
+            var window = new NewReceipt(_categoriesRepository);
+            window.ShowDialog();
+        }
+
+        private void ButtonBase2_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
-using DatabaseProxy;
+using FinancialControl.Database;
 using Funq;
 using ServiceStack;
 using ServiceStack.Api.Swagger;
@@ -19,7 +19,7 @@ namespace FinancialControl.Service
         public class AppHost : AppHostBase
         {
             public AppHost() : base("Services",
-                typeof(FinancialControlServie).Assembly
+                typeof(FinancialControlService).Assembly
                 )
             { }
 

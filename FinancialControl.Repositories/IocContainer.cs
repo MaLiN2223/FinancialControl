@@ -1,4 +1,7 @@
-﻿using Ninject.Modules;
+﻿using System;
+using System.Collections.Generic;
+using Funq;
+using Ninject.Modules;
 using Ninject.Syntax;
 using Utils;
 
@@ -10,6 +13,8 @@ namespace FinancialControl.Repositories
     }
     public class IocContainer : NinjectModule, IIocContainer
     {
+
+
         public override void Load()
         {
             Bind<IIocContainer>().To<IocContainer>();
@@ -18,11 +23,8 @@ namespace FinancialControl.Repositories
             Bind<IPathRepository>().To<PathRepository>();
             Bind<ICategoriesRepository>().To<CategoriesRepository>();
         }
+         
 
-        public IBindingToSyntax<T> Bind<T>()
-        {
-            return Bind<T>();
-        }
     }
 
 }
