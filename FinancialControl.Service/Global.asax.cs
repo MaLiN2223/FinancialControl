@@ -26,7 +26,6 @@ namespace FinancialControl.Service
 
             public override void Configure(Funq.Container container)
             {
-
                 Plugins.Add(new SwaggerFeature());
             }
         }
