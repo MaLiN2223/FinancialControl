@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FinancialControl.Repositories;
+using RestSharp;
 
 namespace FinancialControl
 {
@@ -24,10 +25,16 @@ namespace FinancialControl
     {
         private readonly ICategoriesRepository _categoriesRepository;
 
-        public MainWindow(string apiUrl)
+        public MainWindow()
         {
+#if DEBUG
+            var restClient = new RestClient("http://localhost:53809");
+#else
+            var restClient = new RestClient(apiUrl);
+#endif
             _categoriesRepository =
-                new CategoriesRepository(new DataAccess(apiUrl), new PathRepository());
+                new CategoriesRepository(new DataAccess(new RestHelper(restClient)), new PathRepository());
+            var data = _categoriesRepository.Categores;
             InitializeComponent();
         }
 

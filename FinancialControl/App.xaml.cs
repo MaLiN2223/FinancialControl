@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
 using System.Windows;
-using FinancialControl.Repositories;
-using Ninject;
+using FinancialControl.Repositories; 
 
 namespace FinancialControl
 {
@@ -12,8 +11,8 @@ namespace FinancialControl
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var apiUrl = ConfigurationManager.AppSettings["restService"];
-            var window = new MainWindow(apiUrl);
+          //  var apiUrl = ConfigurationManager.AppSettings["restService"];
+            var window = new MainWindow();
             window.Show();
         }
 
