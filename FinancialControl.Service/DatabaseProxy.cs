@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using FinancialControl.Database;
+using FinancialControl.Database.Tables;
 using FinancialControl.Repositories;
+using FinancialControl.Repositories.Dto;
 using Utils;
 using Category = FinancialControl.Repositories.Category;
+using Color = FinancialControl.Database.Tables.Color;
+using Location = FinancialControl.Database.Tables.Location;
+using Product = FinancialControl.Database.Tables.Product;
+using Receipt = FinancialControl.Repositories.Dto.Receipt;
 
 namespace FinancialControl.Service
 {
@@ -17,7 +23,7 @@ namespace FinancialControl.Service
                 var categories = context.Categories.Select(x => x).ToList();
                 return categories.Select(x => new Category()
                 {
-                    Color = System.Drawing.Color.FromArgb(x.Color.R, x.Color.G, x.Color.B),
+                    Color = new FinancialControl.Repositories.Color { R = x.Color.R, G = x.Color.G, B = x.Color.B },
                     Description = x.Description,
                     Title = x.Title
                 }).ToList();
@@ -34,9 +40,32 @@ namespace FinancialControl.Service
             return Get(x => x.Users.Select(user => user.Login).ToList());
         }
 
+
+        public void AddReceipt(Receipt receipt)
+        {
+            Do(x =>
+            {
+                x.Receipts.Add(new Database.Tables.Receipt
+                {
+                    Products = receipt.Products.Select(y => new Product()
+                    {
+                        Price = y.Price,
+                        Volume = y.Volume,
+                        Name = y.Name
+                    }).ToList(),
+                    Date = receipt.Date.ToDateTimeUnspecified(),
+                    Location = new Location
+                    {
+                        Name = receipt.Location.Name
+                    }
+
+                });
+            });
+        }
+
         public void AddCategory(Category category)
         {
-            Do(x => x.Categories.Add(new FinancialControl.Database.Category()
+            Do(x => x.Categories.Add(new Database.Tables.Category()
             {
                 Color = new Color() { R = category.Color.R, G = category.Color.G, B = category.Color.B },
                 Title = category.Title,

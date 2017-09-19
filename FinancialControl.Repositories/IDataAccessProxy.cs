@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using FinancialControl.Repositories.Dto;
 
 namespace FinancialControl.Repositories
 {
@@ -9,5 +10,6 @@ namespace FinancialControl.Repositories
         void AddCategory(Category category);
         void CreateUser(string login, string password);
         List<string> GetUsers();
+        void AddReceipt(Receipt receipt);
     }
 }

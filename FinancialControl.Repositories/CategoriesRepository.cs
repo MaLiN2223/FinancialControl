@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.Drawing; 
-
-
 namespace FinancialControl.Repositories
 {
+    public class Color
+    {
+        public byte R { get; set; }
+        public byte G { get; set; }
+        public byte B { get; set; }
+    }
     public class Category
-    { 
+    {
         public string Title { get; set; }
         public string Description { get; set; }
         public Color Color { get; set; }
@@ -13,6 +16,7 @@ namespace FinancialControl.Repositories
     public interface ICategoriesRepository
     {
         List<Category> Categores { get; }
+        void AddCategory(Category category);
     }
     public class CategoriesRepository : ICategoriesRepository
     {
@@ -34,6 +38,11 @@ namespace FinancialControl.Repositories
                     _categories = _dataAccess.GetCategories();
                 return _categories;
             }
+        }
+
+        public void AddCategory(Category category)
+        {
+            _dataAccess.AddCategory(category);
         }
     }
 }

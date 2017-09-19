@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FinancialControl.Repositories;
+using FinancialControl.Repositories.Dto;
 using RestSharp;
 
 namespace FinancialControl
@@ -37,6 +38,20 @@ namespace FinancialControl
         public List<string> GetUsers()
         {
             throw new NotImplementedException();
+        }
+
+        public void AddReceipt(Receipt receipt)
+        {
+            receipt.Location = new Location()
+            {
+                Name = "name"
+            };
+            var request = new RestRequest("receipts", Method.POST);
+            request.AddParameter("Date", receipt.Date);
+            request.AddParameter("Location", receipt.Location);
+            request.AddJsonBody(receipt.Products);
+
+            _restHelper.ExecutePost(request);
         }
     }
 }

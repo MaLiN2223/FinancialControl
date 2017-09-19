@@ -1,4 +1,4 @@
-﻿namespace FinancialControl.Database
+﻿namespace FinancialControl.Database.Tables
 {
     public class Color
     {

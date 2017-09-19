@@ -24,23 +24,25 @@ namespace FinancialControl
     public partial class MainWindow : Window, IMainWindow
     {
         private readonly ICategoriesRepository _categoriesRepository;
+        private ReceiptsRepository _receiptsRepository;
 
         public MainWindow()
         {
 #if DEBUG
-            var restClient = new RestClient("http://localhost:53809");
+            var restClient = new RestClient("http://localhost.fiddler:53809");
 #else
             var restClient = new RestClient(apiUrl);
 #endif
+            var dataAccessProxy = new DataAccess(new RestHelper(restClient));
             _categoriesRepository =
-                new CategoriesRepository(new DataAccess(new RestHelper(restClient)), new PathRepository());
-            var data = _categoriesRepository.Categores;
+                new CategoriesRepository(dataAccessProxy, new PathRepository());
+            _receiptsRepository = new ReceiptsRepository(dataAccessProxy);
             InitializeComponent();
         }
 
         private void AddNewReceiptClick(object sender, RoutedEventArgs e)
         {
-            var window = new NewReceipt(_categoriesRepository);
+            var window = new NewReceiptWindow(_categoriesRepository, _receiptsRepository);
             window.ShowDialog();
         }
 
