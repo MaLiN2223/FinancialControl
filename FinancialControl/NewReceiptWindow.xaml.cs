@@ -69,7 +69,7 @@ namespace FinancialControl
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                log.Error("Something went wrong while saving receipt", ex);
                 return;
             }
             MessageBox.Show("Success");

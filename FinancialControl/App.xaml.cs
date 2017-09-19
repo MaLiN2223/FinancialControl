@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 using System.Windows;
-using FinancialControl.Repositories; 
+using FinancialControl.Repositories;
 
 namespace FinancialControl
 {
@@ -11,7 +11,8 @@ namespace FinancialControl
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-          //  var apiUrl = ConfigurationManager.AppSettings["restService"];
+            //  var apiUrl = ConfigurationManager.AppSettings["restService"];
+            log4net.Config.XmlConfigurator.Configure();
             var window = new MainWindow();
             window.Show();
         }
