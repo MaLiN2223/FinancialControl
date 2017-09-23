@@ -141,6 +141,10 @@
       <Project>{68e0db04-d0b3-4063-8f9d-7edf587b6d53}</Project>
       <Name>FinancialControl.Repositories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FinancialControl.Service.Dto\FinancialControl.Service.Dto.csproj">
+      <Project>{4e364f7e-eea7-450c-83a4-c437e038dfd1}</Project>
+      <Name>FinancialControl.Service.Dto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{d44139e5-cb53-4ebd-8155-d4cfec73b7d9}</Project>
       <Name>Utils</Name>

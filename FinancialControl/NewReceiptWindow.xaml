@@ -12,11 +12,11 @@
             <DatePicker x:Name="DatePicker" Text="Select date"/>
             <StackPanel x:Name="NewProductPanel">
                 <Label>Product name:</Label>
-                <TextBox x:Name="ProductName"></TextBox>
+                <TextBox x:Name="ProductName">Product</TextBox>
                 <Label>Product price:</Label>
-                <toolkit:DoubleUpDown x:Name="ProductPrice" Minimum="0" Increment="0.01"></toolkit:DoubleUpDown>
+                <toolkit:DoubleUpDown x:Name="ProductPrice" Minimum="0" Increment="0.01" Value="0"></toolkit:DoubleUpDown>
                 <Label>Product</Label>
-                <toolkit:DoubleUpDown x:Name="ProductVolume" Minimum="0" Increment="0.01"></toolkit:DoubleUpDown>
+                <toolkit:DoubleUpDown x:Name="ProductVolume" Minimum="0" Increment="0.01" Value="0"></toolkit:DoubleUpDown>
                 <Label>Product category</Label>
                 <ComboBox x:Name="CategoriesList" ItemsSource="{Binding Path=Categories}" DisplayMemberPath="Title"/>
                 <Button x:Name="AddProduct" Content="Add" Click="AddProduct_OnClick"/>

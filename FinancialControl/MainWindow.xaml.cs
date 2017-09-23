@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FinancialControl.Repositories;
-using RestSharp;
+using ServiceStack;
 
 namespace FinancialControl
 {
@@ -28,12 +28,8 @@ namespace FinancialControl
 
         public MainWindow()
         {
-#if DEBUG
-            var restClient = new RestClient("http://localhost.fiddler:53809");
-#else
-            var restClient = new RestClient(apiUrl);
-#endif
-            var dataAccessProxy = new DataAccess(new RestHelper(restClient));
+            var client = new JsonServiceClient("http://localhost.fiddler:53809").WithCache();
+            var dataAccessProxy = new DataAccess(client);
             _categoriesRepository =
                 new CategoriesRepository(dataAccessProxy, new PathRepository());
             _receiptsRepository = new ReceiptsRepository(dataAccessProxy);

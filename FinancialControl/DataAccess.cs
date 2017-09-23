@@ -1,33 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using FinancialControl.Repositories;
 using FinancialControl.Repositories.Dto;
-using RestSharp;
+using FinancialControl.Service.Dto; 
+using ServiceStack;
+using Category = FinancialControl.Repositories.Category;
+using Color = FinancialControl.Repositories.Color;
 
 namespace FinancialControl
 {
     public class DataAccess : IDataAccessProxy
     {
-        private readonly IRestHelper _restHelper;
+        private readonly IServiceClient _client;
 
-        public DataAccess(IRestHelper restHelper)
+        public DataAccess(IServiceClient client)
         {
-            _restHelper = restHelper;
+            this._client = client;
         }
 
         public List<Category> GetCategories()
         {
-            var request = new RestRequest("categories", Method.GET);
-            return _restHelper.ExecuteGet<List<Category>>(request);
+            return _client.Get(new AllCategoriesRequest())
+                .Select(Mapper.Map<Service.Dto.Category, Category>).ToList();
         }
 
         public void AddCategory(Category category)
         {
-            var request = new RestRequest("categories", Method.POST);
-            request.AddParameter("Title", category.Title);
-            request.AddParameter("Description", category.Description);
-            request.AddParameter("Color", category.Color);
-            _restHelper.ExecutePost(request);
+            _client.Post(new CreateCategoryRequest()
+            {
+                Color = Mapper.Map<Color, Service.Dto.Color>(category.Color),
+                Title = category.Title,
+                Description = category.Description
+
+            });
         }
 
         public void CreateUser(string login, string password)
@@ -40,18 +47,35 @@ namespace FinancialControl
             throw new NotImplementedException();
         }
 
+        public class Product
+        {
+            public Product(Repositories.Dto.Product product)
+            {
+                Name = product.Name;
+                Volume = product.Volume;
+                Price = product.Price;
+                CategoryName = product.Category.Title;
+            }
+            public string Name { get; set; }
+            public float Volume { get; set; }
+            public float Price { get; set; }
+            public string CategoryName { get; set; }
+        }
+
         public void AddReceipt(Receipt receipt)
         {
-            receipt.Location = new Location()
+            _client.Post(new AddReceiptRequest()
             {
-                Name = "name"
-            };
-            var request = new RestRequest("receipts", Method.POST);
-            request.AddParameter("Date", receipt.Date);
-            request.AddParameter("Location", receipt.Location);
-            request.AddJsonBody(receipt.Products);
-
-            _restHelper.ExecutePost(request);
+                Products = receipt.Products.Select(x => new Service.Dto.Product()
+                {
+                    CategoryTitle = x.Category.Title,
+                    Name = x.Name,
+                    Volume = x.Volume,
+                    Price = x.Price
+                }).ToList(),
+                Location = receipt.Location.Name,
+                Date = receipt.Date.ToDateTimeUnspecified()
+            });
         }
     }
 }

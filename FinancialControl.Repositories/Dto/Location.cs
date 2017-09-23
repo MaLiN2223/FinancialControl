@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FinancialControl.Repositories
+namespace FinancialControl.Repositories.Dto
 {
     [Serializable]
     public class Location

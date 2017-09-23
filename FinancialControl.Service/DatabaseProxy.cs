@@ -47,11 +47,22 @@ namespace FinancialControl.Service
             {
                 x.Receipts.Add(new Database.Tables.Receipt
                 {
-                    Products = receipt.Products.Select(y => new Product()
+                    Products = receipt.Products.Select(y => new Database.Tables.Product()
                     {
                         Price = y.Price,
                         Volume = y.Volume,
-                        Name = y.Name
+                        Name = y.Name,
+                        Category = new Database.Tables.Category()
+                        {
+                            Title = y.Category.Title,
+                            Description = y.Category.Description,
+                            Color = new Color()
+                            {
+                                R = y.Category.Color.R,
+                                G = y.Category.Color.G,
+                                B = y.Category.Color.B,
+                            }
+                        }
                     }).ToList(),
                     Date = receipt.Date.ToDateTimeUnspecified(),
                     Location = new Location
