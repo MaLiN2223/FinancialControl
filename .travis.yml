@@ -1,7 +1,7 @@
 language: csharp
 solution: "./FinancialControl/FinancialControl.sln"
 install:
-- travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./Fibonacci/Fibonacci.sln
+- travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./FinancialControl/FinancialControl.sln
 script:
 - xbuild ./FinancialControl/FinancialControl.sln
 - mono ./FinancialControl/packages/xunit.runner.console*/tools/xunit.console.exe ./FinancialControl/FinancialControl.Service.UnitTests/bin/Debug/FinancialControl.Service.UnitTests.dll
