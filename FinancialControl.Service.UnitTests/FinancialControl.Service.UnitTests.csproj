@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="DatabaseProxyTests.cs" />
     <Compile Include="FinancialControlServiceTests.cs" />
+    <Compile Include="ProductEqualityComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsersServiceTests.cs" />
   </ItemGroup>
