@@ -42,6 +42,12 @@ namespace FinancialControl.Service.UnitTests
         }
 
         [Fact]
+        public void ThisShouldFail()
+        {
+            Assert.True(false);
+        }
+
+        [Fact]
         public void Post_AddReceiptRequest_CallsProxyWithPropperArguments()
         {
             var date = new DateTime();
